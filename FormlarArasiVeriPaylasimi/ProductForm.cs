@@ -20,13 +20,14 @@ namespace FormlarArasiVeriPaylasimi
 
         public List<string> Birimler;
         public List<string> Symbols;
-       
+
 
         //Solution geneline açmak
         //Seçili ürün
         public (int id, string urunKodu, string urunAdi, string Birim, decimal Fiyat, string Sembol, string Aciklama) seciliUrun;
 
         public bool isSuccess = false;
+        public bool isDeleted = false; //Silme işlemimi yapmak istiyorsun
 
         private void ProductForm_Load(object sender, EventArgs e)
         {
@@ -110,11 +111,30 @@ namespace FormlarArasiVeriPaylasimi
                 seciliUrun.Birim = birim;
                 seciliUrun.Sembol = symbol;
             }
-            
+
             isSuccess = true; //buton tarafından işlem yapılmış olacak
             this.Close();
         }
 
+        private void btnSil_Click(object sender, EventArgs e)
+        {
+            if (seciliUrun.id > 0) //secilen ürün var mı 
+            {
+                DialogResult result = MessageBox.Show("Bu kaydı silme istiyor musunuz", "Stok Program", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
 
+                if (result == DialogResult.OK)
+                {//silme işlemi yapılacak
+
+                    isDeleted = true; //true ise silme işlemi yapılacağı bilgisi alınmış olur.
+                    this.Close();
+
+                }
+            }
+            else
+            {//sil butonuna basıldığında ürün bulunamaması durumunda
+
+                MessageBox.Show("Herhangi bir ürün bulunamadı.", "Stok Programı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
     }
 }

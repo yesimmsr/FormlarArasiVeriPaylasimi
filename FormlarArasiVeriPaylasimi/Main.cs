@@ -52,7 +52,7 @@ namespace FormlarArasiVeriPaylasimi
             //showDialog(); cevap bekler
             //Show(); formu açar cevap beklemez devam eder.
 
-            var productForm =  GetProductForm();
+            var productForm = GetProductForm();
             productForm.ShowDialog();
             var seciliUrun = productForm.seciliUrun; //üst formdan alt forma değer gönderir
 
@@ -107,21 +107,33 @@ namespace FormlarArasiVeriPaylasimi
             if (lstUrunler.SelectedIndex > -1) //hata vermesin kontrolü aynı zamanda seçim olup olmadığına bakar.
             {
                 var selectedUrun = UrunListesi[lstUrunler.SelectedIndex]; // seçilen ürünü alır. value type olduğu için referans güncellemesi yapmaz.
-                
+
                 //aynı formu hem yeni kayıt(insert) hemde güncelleme(update) işlemi için kullanılır.
-                var productForm =  GetProductForm();
+                var productForm = GetProductForm();
                 productForm.seciliUrun = selectedUrun; //seçilen ürün forma set edilir.
                 productForm.ShowDialog();
 
 
-                //value type olduğu için ValueType gibi davranıyor o yüzden bilgileri tekrar koleksiyondaki ile değiştirildi.
-                UrunListesi[lstUrunler.SelectedIndex] = productForm.seciliUrun;  // yukardaki(if in altındaki tanımlama) value değerinden ürünleri güncelledik.
+                if (productForm.isDeleted)
+                {//silme işlemi için geri döndü
+
+                    UrunListesi.Remove(productForm.seciliUrun);
+
+                }
+                else
+                {//update işlemi için geri döndü.
+
+
+                    //value type olduğu için ValueType gibi davranıyor o yüzden bilgileri tekrar koleksiyondaki ile değiştirildi.
+                    UrunListesi[lstUrunler.SelectedIndex] = productForm.seciliUrun;  // yukardaki(if in altındaki tanımlama) value değerinden ürünleri güncelledik.
+                }
+
 
                 SetUrunlerDataSourceGridView(); //lstbox ı güncellesin productform da güncelleme olursa diye
 
             }
 
-           
+
         }
     }
 
