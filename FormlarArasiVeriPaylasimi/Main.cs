@@ -27,6 +27,10 @@ namespace FormlarArasiVeriPaylasimi
             "₺","$","€","£"
         };
 
+
+        int urunId = 0;
+        int musteriId = 0;
+
         public ProductForm GetProductForm()
         {
             var form = new ProductForm();
@@ -38,6 +42,8 @@ namespace FormlarArasiVeriPaylasimi
 
         //Ürün Listesi bu tuple da tutulacak
         List<(int id, string urunKodu, string urunAdi, string Birim, decimal Fiyat, string Sembol, string Aciklama)> UrunListesi = new List<(int id, string urunKodu, string urunAdi, string Birim, decimal Fiyat, string Sembol, string Aciklama)>();
+
+
 
         private void btnUrun_Click(object sender, EventArgs e)
         {
@@ -67,7 +73,18 @@ namespace FormlarArasiVeriPaylasimi
 
         public int GetUrunSiradakiId()
         {
-            return UrunListesi.Count;
+
+            //değişkenin önüne ++ gelirse değer okuması yapılmadan değeri arttırılır. Ondan sonra değer okunur.
+            // urunId ++  değer okunur sonrasında 1 arttırılır.
+
+            return ++urunId;
+
+            //return UrunListesi.Count;
+        }
+
+        public int GetMusteriSiradakiId()
+        {
+            return ++musteriId;
         }
 
         public void SetUrunlerDataSourceGridView()
@@ -77,7 +94,7 @@ namespace FormlarArasiVeriPaylasimi
             {
 
                 string birim = MainBirimler[Convert.ToInt32(urun.Birim)];
-                string symbol = MainBirimler[Convert.ToInt32(urun.Sembol)];
+                string symbol = MainSymbols[Convert.ToInt32(urun.Sembol)];
 
                 string stringItem = $"id => {urun.id}, ÜrünKod =>{urun.urunKodu}, ÜrünAdı =>{urun.urunAdi}, Birim=>{birim} ,Fiyat=>{urun.Fiyat.ToString("N2")}{symbol}, Aciklama =>{urun.Aciklama}";
 
