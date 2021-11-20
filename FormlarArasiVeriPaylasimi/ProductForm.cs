@@ -94,12 +94,10 @@ namespace FormlarArasiVeriPaylasimi
             string aciklama = txtAciklama.Text;
 
 
-            if (seciliUrun.id == 0 && string.IsNullOrEmpty(seciliUrun.urunKodu))
+            if (seciliUrun.id == 0)
             {//insert
-                //if koşulunda urun kodu boş mu veya null değer mi aynı zamanda id 0 mı
 
-
-                //Bu bir yeni ürünüdrü kayıt edilmesi gerekir.
+                //Bu bir yeni ürünün kayıt edilmesi gerekir.
                 seciliUrun = (0, urunKodu, urunAdi, birim, fiyat, symbol, aciklama); //yukarıdaki tuple urun listesindeki sıra ile aynı olmalıdır.
             }
             else
