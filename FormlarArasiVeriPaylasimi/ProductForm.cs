@@ -17,15 +17,10 @@ namespace FormlarArasiVeriPaylasimi
             InitializeComponent();
         }
 
-        List<string> Birimler = new List<string>()
-        {
-            "Adet", "Kg", "Litre", "Paket", "Koli"
-        };
 
-        List<string> Symbols = new List<string>()
-        {
-            "₺","$","€","£"
-        };
+        public List<string> Birimler;
+        public List<string> Symbols;
+       
 
         //Solution geneline açmak
         //Seçili ürün
@@ -36,7 +31,25 @@ namespace FormlarArasiVeriPaylasimi
         private void ProductForm_Load(object sender, EventArgs e)
         {
             FormFill();
+            FormData();
         }
+
+        public void FormData()
+        {
+            if (seciliUrun.id > -1 && !string.IsNullOrEmpty(seciliUrun.urunKodu)) //urunkodu null dan farklıysa
+            {
+                txtUrunKodu.Text = seciliUrun.urunKodu;
+                txtUrunAdi.Text = seciliUrun.urunAdi;
+                txtAciklama.Text = seciliUrun.Aciklama;
+                nuFiyat.Value = seciliUrun.Fiyat;
+                cmbBirim.SelectedIndex = Convert.ToInt32(seciliUrun.Birim); //index ten alıp bilgisini yollucak
+                cmbSembol.SelectedIndex = Convert.ToInt32(seciliUrun.Sembol);
+            }
+            else
+            {
+            }
+        }
+
 
         public void FormFill()
         {
@@ -80,12 +93,30 @@ namespace FormlarArasiVeriPaylasimi
             string symbol = cmbSembol.SelectedIndex.ToString();
             string aciklama = txtAciklama.Text;
 
-            //yukarıdaki tuple urun listesindeki sıra ile aynı olmalıdır.
-            seciliUrun = (0, urunKodu, urunAdi, birim, fiyat, symbol, aciklama);
+
+            if (seciliUrun.id == 0 && string.IsNullOrEmpty(seciliUrun.urunKodu))
+            {//insert
+                //if koşulunda urun kodu boş mu veya null değer mi aynı zamanda id 0 mı
+
+
+                //Bu bir yeni ürünüdrü kayıt edilmesi gerekir.
+                seciliUrun = (0, urunKodu, urunAdi, birim, fiyat, symbol, aciklama); //yukarıdaki tuple urun listesindeki sıra ile aynı olmalıdır.
+            }
+            else
+            {//update
+                //Bu bir güncelleme işlemidir buradan devame et
+                seciliUrun.urunKodu = urunKodu;
+                seciliUrun.urunAdi = urunAdi;
+                seciliUrun.Fiyat = fiyat;
+                seciliUrun.Aciklama = aciklama;
+                seciliUrun.Birim = birim;
+                seciliUrun.Sembol = symbol;
+            }
+            
             isSuccess = true; //buton tarafından işlem yapılmış olacak
             this.Close();
         }
 
-       
+
     }
 }

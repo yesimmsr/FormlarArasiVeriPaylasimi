@@ -34,8 +34,8 @@ namespace FormlarArasiVeriPaylasimi
             this.btnUrun = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.lstUrunler = new System.Windows.Forms.ListBox();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -97,16 +97,6 @@ namespace FormlarArasiVeriPaylasimi
             this.tabPage1.Text = "Ürünler";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // tabPage2
-            // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 29);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(337, 393);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Müşteriler";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
             // lstUrunler
             // 
             this.lstUrunler.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -116,6 +106,17 @@ namespace FormlarArasiVeriPaylasimi
             this.lstUrunler.Name = "lstUrunler";
             this.lstUrunler.Size = new System.Drawing.Size(331, 387);
             this.lstUrunler.TabIndex = 0;
+            this.lstUrunler.DoubleClick += new System.EventHandler(this.lstUrunler_DoubleClick);
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Location = new System.Drawing.Point(4, 29);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(337, 393);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Müşteriler";
+            this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // Main
             // 
